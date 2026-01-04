@@ -186,8 +186,9 @@ def atMostOne(literals: List[Expr]) -> Expr:
     """
     "*** BEGIN YOUR CODE HERE ***"
     clauses = []
-    for a, b in itertools.combinations(literals, 2):
-        clauses.append((~a) | (~b))
+    # Para cada par (A, B), não podem ser ambos verdadeiros: (~A | ~B)
+    for pair in itertools.combinations(literals, 2):
+        clauses.append(~pair[0] | ~pair[1])
     return conjoin(clauses)
     util.raiseNotDefined()
     "*** END YOUR CODE HERE ***"
